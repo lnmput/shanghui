@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>商户管理</title>
+    <link href="/Public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Public/css/main.css" rel="stylesheet">
+  </head>
+
+    <div class="container-fluid">
+    	<div class="row mynav">
+    		<div class="col-md-2">
+    		</div>
+    		<div class="col-md-8">
+               <a class="btn btn-primary" href="{:U('Shanghui/shlist')}"  role="button">商会管理</a>
+               <a class="btn btn-warning logout" href="/admin/logout" role="button">退出</a>
+    		</div>
+    		<div class="col-md-2">
+    		</div>
+    	</div>
+    	<div class="row">
+	    	<div class="col-md-2"></div>
+	    	<div class="col-md-8">
+	    		<h3>{$shanghuiInfo['shname']}</h3>
+	    		<ul>
+	    			<li>负责人姓名:{$shanghuiInfo['mastername']}</li>
+	    			<li>负责人手机:{$shanghuiInfo['masterphone']}</li>
+	    			<li>负责人微信:{$shanghuiInfo['masterwechat']}</li>
+					<li>负责人微信:{$shanghuiInfo['masterwechat']}</li>
+					<li>负责人QQ:{$shanghuiInfo['masterqq']}</li>
+					<li>结算账户:{$shanghuiInfo['shcount']}</li>
+	    		</ul>
+	    		<a class="btn btn-default addshanghu" href="{:U('Shanghu/addShanghuList',array('id'=>$shanghuiInfo['id']))}" role="button">增加商户</a>
+	    		<a class="btn btn-default importshanghu" href="importshanghu.html" role="button">批量导入</a>
+	    	</div>
+	    	<div class="col-md-2"></div>
+    	</div>
+    	<div class="row">
+    		<div class="col-md-2"></div>
+    		<div class="col-md-8">
+    			      <table class="table table-striped">
+					        <thead>
+					          <tr>
+					            <th>商户名</th>
+					            <th>是否缴费</th>
+					            <th>是否充值</th>
+					            <th>修改</th>
+					            <th>删除</th>
+					          </tr>
+					        </thead>
+					        <tbody>
+							   <foreach name="shanghuInfo" item="vo">
+							      <tr>
+								  <td><a href="">{$vo.shname}</a></td>
+					              <td>{$vo.ismoney}</td>
+								  <td>{$vo.isvip}</td>
+					              <td><a title="{$vo.id}" href="{:U('Shanghu/updateShanghuList',array('id'=>$vo['id']))}">修改</a></td>
+					              <td><a title="{:U('Shanghu/deleteshanghu',array('id'=>$vo['id']))}" class="deleteshanghu" href="#">删除</a></td>
+								  </tr>
+                        </foreach> 
+					        </tbody>
+                      </table>
+    		</div>
+    		<div class="col-md-2"></div>
+    	</div>
+    	
+    	
+    	
+    	
+    	
+    	
+    </div>
+    
+    
+    
+    <script src="/Public/js/jquery.min.js"></script>
+    <script src="/Public/js/bootstrap.min.js"></script>
+    <script src="/Public/js/main.js"></script>
+  </body>
+</html>

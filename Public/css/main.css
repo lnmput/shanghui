@@ -1,0 +1,33 @@
+body{
+	font-family: "微软雅黑";
+	margin: 0;
+	padding: 0;
+}
+.login{
+	position: relative;
+	top: 300px;
+}
+.mynav{
+	background: #E7E7E7;
+	padding: 5px 0;
+}
+.logout{
+	float: right;
+}
+.addshanghu {
+	float: right;
+	margin-top: 15px;
+}
+.addshanghui {
+	float: right;
+	margin-top: 15px;
+}
+.importshanghu,.exportshanghu{
+	float: right;
+	margin-top: 15px;
+	margin-right: 10px;
+}
+.error{
+	color: #f0ad4e;
+}
+
