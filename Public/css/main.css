@@ -30,4 +30,8 @@ body{
 .error{
 	color: #f0ad4e;
 }
+.backup{
+	float: right;
+	margin-right: 5px;
+}
 

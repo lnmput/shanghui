@@ -16,6 +16,7 @@
     		<div class="col-md-8">
                <a class="btn btn-primary" href="<?php echo U('Shanghui/shlist');?>" role="button">商会管理</a>
                <a class="btn btn-warning logout" href="/admin/logout" role="button">退出</a>
+			   <a class="btn btn-warning backup" target="_blank" href="<?php echo U('Admin/backup');?>" role="button">数据备份</a>
     		</div>
     		<div class="col-md-2">
     		</div>
@@ -23,7 +24,7 @@
     	<div class="row" style="margin-top: 50px;">
 			    		<div class="col-md-4"></div>
 			    		<div class="col-md-4">
-			    			      <h3>增加商会 :</h3>
+			    			      <h3>您正在增加商会信息...</h3>
 								  <form class="form-horizontal" id="addshanghui_form" method="post" action="add">
 								  <div class="form-group">
 								    <div class="col-sm-10">

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
     		<div class="col-md-2">
     		</div>
     		<div class="col-md-8">
-               <a class="btn btn-primary" href="{:U('Shanghui/shlist')}"  role="button">商会管理</a>
+               <a class="btn btn-primary" href="<?php echo U('Shanghui/shlist');?>"  role="button">商会管理</a>
                <a class="btn btn-warning logout" href="/admin/logout" role="button">退出</a>
-			   <a class="btn btn-warning backup" target="_blank" href="{:U('Admin/backup')}" role="button">数据备份</a>
+			   <a class="btn btn-warning backup" target="_blank" href="<?php echo U('Admin/backup');?>" role="button">数据备份</a>
     		</div>
     		<div class="col-md-2">
     		</div>
@@ -24,10 +24,10 @@
     	<div class="row" style="margin-top: 50px;">
 			    		<div class="col-md-4"></div>
 			    		<div class="col-md-4">
-			    			       <h3>{$shanghuiName}</h3>
+			    			       <h3><?php echo ($shanghuiName); ?></h3>
 			    			       <h4>正在增加商户...</h4>
-								  <form class="form-horizontal" id="addshanghu_form" method="post" action="{:U('Shanghu/addShanghu')}">
-								  	<input type="hidden" name='id' value="{$id}"/>
+								  <form class="form-horizontal" id="addshanghu_form" method="post" action="<?php echo U('Shanghu/addShanghu');?>">
+								  	<input type="hidden" name='id' value="<?php echo ($id); ?>"/>
 								  <div class="form-group">
 								    <div class="col-sm-10">
 								      <input type="text" name="shanghuname" class="form-control" placeholder="请输入商户名">

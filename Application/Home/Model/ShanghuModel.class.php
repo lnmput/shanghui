@@ -22,7 +22,7 @@ class ShanghuModel extends Model
 	*/
 	public function getPartInfoById($id)
 	{
-		$data = $this->where("belongSh={$id}")->getField('shName,isMoney,isVip,addTime,updateTime');
+		$data = $this->where("belongSh={$id}")->getField('shName,masterName,masterPhone,masterQQ,masterWechat,masterEmail,isMoney,isVip,addTime,updateTime');
 		return $data;
 	}
 	
@@ -34,12 +34,19 @@ class ShanghuModel extends Model
 	{
 		//数据重组
 		//dump($data);
-		$info['shName']=$data['shanghuname'];
+		$time=date('Y-m-d H:m:s');
+		$info['shName']=$data['shName'];
 		$info['belongSh']=$data['id'];
+		$info['masterName']=$data['masterName'];
+		$info['masterPhone']=$data['masterPhone'];
+		$info['masterQQ']=$data['masterQQ'];
+		$info['masterWechat']=$data['masterWechat'];
+		$info['masterEmail']=$data['masterEmail'];	
 		$info['isMoney']=$data['ismoney'];
 		$info['isVip']=$data['isvip'];
-		$info['addTime']=date('Y-m-d H:m:s');
-		$info['updateTime']=date('Y-m-d H:m:s');
+		$info['addTime']=$time;
+		$info['updateTime']=$time;
+		//dump($info);exit();
 		$result=$this->data($info)->add();
 		
 		return $result;
@@ -63,10 +70,17 @@ class ShanghuModel extends Model
 		//dump($data);
 		//数据重组
 		$info['id']=$data['id'];
-		$info['shName']=$data['shanghuname'];
+		$info['shName']=$data['shName'];
+		$info['masterName']=$data['masterName'];
+		$info['masterPhone']=$data['masterPhone'];
+		$info['masterQQ']=$data['masterQQ'];
+		$info['masterWechat']=$data['masterWechat'];
+		$info['masterEmail']=$data['masterEmail'];
 		$info['isMoney']=$data['ismoney'];
 		$info['isVip']=$data['isvip'];
-		$info['updateTime']=date("Y-m-d H:m:s");
+		$info['updateTime']=date('Y-m-d H:m:s');
+		//dump($info);exit();
+		
 		$result=$this->save($info);
 		return $result;
 	}
@@ -78,6 +92,17 @@ class ShanghuModel extends Model
 	{
 		$result=$this->where("id={$id}")->getField('belongSh');
 		return $result;
+	}
+	
+	/*
+	 * 根据商会id查找商会名
+	 */
+	
+	public function getShanghuiNameById($id)
+	{
+		$result=$this->where("id={$id}")->getField('belongSh');
+		return $result;
+		
 	}
 	
 	/*

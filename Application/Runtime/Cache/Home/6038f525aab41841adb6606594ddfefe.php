@@ -1,7 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); ?>
-
-
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8">
@@ -20,6 +17,7 @@
                
                <a class="btn btn-primary" href="<?php echo U('Shanghui/shlist');?>"  role="button">商会管理</a>
                <a class="btn btn-warning logout" href="/admin/logout" role="button">退出</a>
+			   <a class="btn btn-warning backup" target="_blank" href="<?php echo U('Admin/backup');?>" role="button">数据备份</a>
     		</div>
     		<div class="col-md-2">
     		</div>

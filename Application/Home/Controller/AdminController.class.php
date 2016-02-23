@@ -57,10 +57,30 @@ class AdminController extends Controller
 		
 	}
 	
+	/*
+	 * 数据库备份
+	 */
+	public function backup()
+	{
+		// 导入Org类库包 Library/Org/Util/Date.class.php类库
+        //import("Org.Util.Date");
+		import("Org.Util.DbManage");
+		$db = new \DBManage ( C('DB_HOST'), C('DB_USER'), C('DB_PWD'), C('DB_NAME'), 'utf8' );
+		// 参数：备份哪个表(可选),备份目录(可选，默认为backup),分卷大小(可选,默认2048，即2M)
+		$db->backup ('','','');
+		echo "<h1>获取备份文件,请联系管理员!!!</h1>";
+	}
 	
 	
+	/*
+	 * 邮件发送
+	 */
 	
-	
+	public function sendEmail()
+	{
+
+		
+	}
 	
 	
 	

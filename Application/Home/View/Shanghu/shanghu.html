@@ -16,6 +16,7 @@
     		<div class="col-md-8">
                <a class="btn btn-primary" href="{:U('Shanghui/shlist')}"  role="button">商会管理</a>
                <a class="btn btn-warning logout" href="/admin/logout" role="button">退出</a>
+			   <a class="btn btn-warning backup" target="_blank" href="{:U('Admin/backup')}" role="button">数据备份</a>
     		</div>
     		<div class="col-md-2">
     		</div>
@@ -31,7 +32,7 @@
 	    		<span class="label label-info">负责人QQ:{$shanghuiInfo['masterqq']}</span>
 				<span class="label label-info">结算账户:{$shanghuiInfo['shcount']}</span>
 				
-	    		<a class="btn btn-default addshanghu" href="{:U('Shanghu/addShanghuList',array('id'=>$shanghuiInfo['id']))}" role="button">增加商户</a>
+	    		<a class="btn btn-default addshanghu" href="{:U('Shanghu/addShanghuList',array('id'=>$shanghuiInfo['id'],'shanghuiName'=>$shanghuiInfo['shname']))}" role="button">增加商户</a>
 	    		<a class="btn btn-default importshanghu" href="#" style="display:none;" role="button">导入</a>
 				<a class="btn btn-default exportshanghu" id="exportshanghu" target="_blank" href="{:U('Shanghu/exportShanghu',array('id'=>$shanghuiInfo['id']))}" role="button">导出</a>
 	    	</div>
@@ -53,10 +54,10 @@
 					        <tbody>
 							   <foreach name="shanghuInfo" item="vo">
 							      <tr>
-								  <td><a href="">{$vo.shname}</a></td>
+								  <td><a href="{:U('Shangping/index',array('id'=>$vo['id']))}">{$vo.shname}</a></td>
 					              <td>{$vo.ismoney}</td>
 								  <td>{$vo.isvip}</td>
-					              <td><a title="{$vo.id}" href="{:U('Shanghu/updateShanghuList',array('id'=>$vo['id']))}">修改</a></td>
+					              <td><a title="{$vo.id}" href="{:U('Shanghu/updateShanghuList',array('id'=>$vo['id'],'shanghuiName'=>$shanghuiInfo['shname']))}">修改</a></td>
 					              <td><a title="{:U('Shanghu/deleteshanghu',array('id'=>$vo['id']))}" class="deleteshanghu" href="#">删除</a></td>
 								  </tr>
                         </foreach> 
