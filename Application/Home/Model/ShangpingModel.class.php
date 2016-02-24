@@ -13,6 +13,22 @@ class ShangpingModel extends Model
 		return  $info;
 	}
 	/*
+	 * 获得某个商户下的所有商品条数
+	*/
+	public function getAllCount($id)
+	{
+		$count=$this->where("isShanghu={$id}")->count('id');
+		return $count;
+	}
+	/*
+	 * 分页显示某个商户下的所有商品
+	 */
+	public function pageAllShangping()
+	{
+		$this->where('status=1')->order('create_time')->limit($Page->firstRow.','.$Page->listRows)->select();
+	}
+	
+	/*
 	 * 根据商品id获得商品信息
 	 */
 	public function getShangpingById($id)
@@ -68,6 +84,11 @@ class ShangpingModel extends Model
 		$result=$this->delete($id);
 		return $result;
 	}
+	
+
+	
+	
+	
 	
 	
 	

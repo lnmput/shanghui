@@ -115,8 +115,17 @@ class ShanghuController extends HomeController
 	
 	public function deleteshanghu()
 	{
+		//商户id
 		$id=I('get.id');
 		$shanghuModel=D('Shanghu');
+		//商户下是否存在商品,如果存在,不允许删除
+		$shangpingModel=D('Shangping');
+		$count=$shangpingModel->getAllCount($id);
+		if($count>0)
+		{
+			$this->error("删除失败");
+		}
+		
 		//根据商户id查找对应的商会id
 		$shanghuiId=$shanghuModel->getShanghuiIdByid($id);
 		$result=$shanghuModel->deleteShanghu($id);

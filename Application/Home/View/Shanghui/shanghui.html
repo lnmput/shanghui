@@ -9,20 +9,9 @@
     <link href="/Public/css/main.css" rel="stylesheet">
   </head>
 <body>
+	    <include file='./header'/>
     <div class="container-fluid">
-    	<div class="row mynav">
-    		<div class="col-md-2">
-    		</div>
-    		<div class="col-md-8">
-               
-               <a class="btn btn-primary" href="{:U('Shanghui/shlist')}"  role="button">商会管理</a>
-               <a class="btn btn-warning logout" href="/admin/logout" role="button">退出</a>
-			   <a class="btn btn-warning backup" target="_blank" href="{:U('Admin/backup')}" role="button">数据备份</a>
-    		</div>
-    		<div class="col-md-2">
-    		</div>
-    	</div>
-    	<div class="row">
+    	<div class="row" style="margin:50px 0 10px;">
 	    	<div class="col-md-2"></div>
 	    	<div class="col-md-8">
 	    		<a class="btn btn-default addshanghui" href="addShanghui" role="button">增加商会</a>

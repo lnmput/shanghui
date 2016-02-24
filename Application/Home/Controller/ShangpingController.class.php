@@ -4,8 +4,10 @@
  */
 
 namespace Home\Controller;
+use Think\Model;
 class ShangpingController extends HomeController
 {
+	
 	/*
 	 * 展示某个商户下的所有商品信息
 	 */
@@ -16,6 +18,7 @@ class ShangpingController extends HomeController
         $shangpingModel=D("Shangping");
         //商品信息
         $result1=$shangpingModel->getAllShangping($id);
+        //dump($count);
        // dump($result1);
         //商户信息
         $shanghuModel=D('Shanghu');
@@ -25,13 +28,27 @@ class ShangpingController extends HomeController
         $shanghuiId=$shanghuModel->getShanghuiIdByid($id);
         $shanghuiModel=D("Shanghui");
         $shanghuiName=$shanghuiModel->getNameByid($shanghuiId);
-       // dump($shanghuiName);
-        $this->assign('shangpingInfo',$result1);
-        $this->assign('shanghuInfo',$result2);
-        $this->assign('shanghuiName',$shanghuiName);
-        
-
-		$this->display('shangping');
+		//分页:
+		//获得总条数
+		$count=$shangpingModel->getAllCount($id);
+		//每页显示两条
+		$Page = new \Think\Page($count,10);
+		$Page->setConfig('prev','上页');	
+		$Page->setConfig('next','下页');
+		$Page->setConfig('first','首页');
+		$Page->setConfig('first','首页');
+		$Page->setConfig('last','尾页');
+	    $Page->setConfig('theme',"%HEADER% %FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%");
+		$Page->setConfig('header',"共 %TOTAL_ROW% 条记录");
+		$show       = $Page->show();// 分页显示输出
+		//获得数据
+		$list = $shangpingModel->where("isShanghu={$id}")->limit($Page->firstRow.','.$Page->listRows)->select();
+		$this->assign('shanghuInfo',$result2);//其他一些必数据,和分页无关
+		$this->assign('shangpingInfo',$list);// 赋值数据集
+		$this->assign('shanghuiName',$shanghuiName);
+		$this->assign('page',$show);// 赋值分页输出
+		$this->display(shangping); // 输出模板
+		
 	}
 	/*
 	 * 添加商品模板展示
@@ -40,8 +57,11 @@ class ShangpingController extends HomeController
 	{
 		//商户id
 		$id=I('get.id');
+		//商户名
+		$shanghuname=I('get.shanghuname');
 		//dump($id);
 		$this->assign('id',$id);
+		$this->assign('shanghuname',$shanghuname);
 		$this->display('addshangping');
 	}
 	/*
@@ -75,11 +95,14 @@ class ShangpingController extends HomeController
 	{
 		//商品id
 		$id=I('get.id');
+		//所属商户名
+		$shanghuName=I('get.shanghuiName');
 		//获得商品信息
 		$shangpingModel=D("Shangping");
 		$result=$shangpingModel->getShangpingById($id);
 		//dump($result);
 		$this->assign('data',$result);
+		$this->assign('shanghuname',$shanghuName);
 		$this->display('updateshangping');
 	}
 	/*
@@ -183,6 +206,45 @@ class ShangpingController extends HomeController
 		header('Cache-Control: max-age=0');//禁止缓存
 	}
 	
-	
+	/*
+	 *
+	* 商品搜索
+	*/
+	public function searchShangping()
+	{
+		$keyWords=trim(I('get.keywords'));
+        if(empty($keyWords)){
+        	$key="'%{$keyWords}%'";
+        }else{
+        	$key="'%{$keyWords}%'";
+        }
+	    //dump($result);
+		$this->assign('keywords',$keyWords);
+		$Model=new Model();
+		//分页:
+		//获得总条数
+		$sqlcount="SELECT count('id') FROM lk_shangping shangping WHERE shangping.shangName like ".$key;
+		$count=$Model->query($sqlcount);
+		$countAll=$count[0]["count('id')"];
+		//echo $countAll; exit();
+		//每页显示两条
+		$Page = new \Think\Page($countAll,10);
+		$Page->setConfig('prev','上页');
+		$Page->setConfig('next','下页');
+		$Page->setConfig('first','首页');
+		$Page->setConfig('first','首页');
+		$Page->setConfig('last','尾页');
+		$Page->setConfig('theme',"%HEADER% %FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%");
+		$Page->setConfig('header',"共 %TOTAL_ROW% 条记录");
+		$show       = $Page->show();// 分页显示输出
+	    //查找所有数据
+		$sql="SELECT shanghui.shName shanghuiname,shanghu.shName shanghuname,shangping.* FROM lk_shangping shangping  LEFT  JOIN lk_shanghu shanghu ON shangping.isShanghu=shanghu.id  LEFT  JOIN lk_shanghui shanghui ON shanghu.belongSh=shanghui.id WHERE shangping.shangName like ".$key." LIMIT {$Page->firstRow},{$Page->listRows}";
+		
+		$result=$Model->query($sql);
+		//$list = $shangpingModel->where("isShanghu={$id}")->limit($Page->firstRow.','.$Page->listRows)->select();
+		$this->assign('data',$result);// 赋值数据集
+		$this->assign('page',$show);// 赋值分页输出
+		$this->display(shangpinglist); // 输出模板
+	}
 	
 }

@@ -9,22 +9,14 @@
     <link href="/Public/css/main.css" rel="stylesheet">
   </head>
 
+    <include file='./header'/>
+
     <div class="container-fluid">
-    	<div class="row mynav">
-    		<div class="col-md-2">
-    		</div>
-    		<div class="col-md-8">
-                <a class="btn btn-primary" href="{:U('Shanghui/shlist')}"  role="button">商会管理</a>
-               <a class="btn btn-warning logout" href="/admin/logout" role="button">退出</a>
-			   <a class="btn btn-warning backup" target="_blank" href="{:U('Admin/backup')}" role="button">数据备份</a>
-    		</div>
-    		<div class="col-md-2">
-    		</div>
-    	</div>
+    	
     	<div class="row">
 	    	<div class="col-md-2"></div>
 	    	<div class="col-md-8">
-	    		<h3>{$shanghuiName}旗下商会:</h3>
+	    		<h3 style="margin:80px 0 10px">{$shanghuiName}旗下商户:</h3>
 	    		<h4>{$shanghuInfo[0]['shname']}</h4>
 	    		<span class="label label-info">负责人姓名:{$shanghuInfo[0]['mastername']}</span>
 	    		<span class="label label-info">负责人手机:{$shanghuInfo[0]['masterphone']}</span>
@@ -33,7 +25,7 @@
 				<span class="label label-info">负责人邮箱:{$shanghuInfo[0]['masteremail']}</span>
 	    		
 
-	    		<a class="btn btn-default addshanghu" href="{:U('Shangping/addShangpingList',array('id'=>$shanghuInfo[0]['id']))}" role="button">添加商品</a>
+	    		<a class="btn btn-default addshanghu" href="{:U('Shangping/addShangpingList',array('id'=>$shanghuInfo[0]['id'],'shanghuname'=>$shanghuInfo[0]['shname']))}" role="button">添加商品</a>
 	    		<a class="btn btn-default exportshanghu" target="_blank" href="{:U('Shangping/exportshanghu',array('id'=>$shanghuInfo[0]['id'],'shanghuname'=>$shanghuInfo[0]['shname']))}" role="button">导出</a>
 	    	</div>
 	    	<div class="col-md-2"></div>
@@ -57,13 +49,14 @@
 					        <tbody>
 					          <volist name="shangpingInfo" id="data">
 					          	 <tr>
-								 <td><a href="shangping.html">{$data.shangname}</a></td>
+			
+								 <td>{$data.shangname}</td>
 					             <td>{$data.shangprice}元</td>
 					             <td>{$data.shangbase}%</td>
 					             <td>{$data.shangone}%</td>
 					             <td>{$data.shangtwo}%</td>
 					             <td>{$data.shangthree}%</td> 
-					             <td><a title="{$data.id}" href="{:U('Shangping/updateShangpingList',array('id'=>$data['id']))}">修改</a></td>
+					             <td><a title="{$data.id}" href="{:U('Shangping/updateShangpingList',array('id'=>$data['id'],'shanghuiName'=>$shanghuInfo[0]['shname']))}">修改</a></td>
 					             <td><a  class="deleteshangping" title="{:U('Shangping/deleteShangping',array('id'=>$data['id']))}" href="#">删除</a></td>
 								 </tr>
 							  </volist>
@@ -71,7 +64,14 @@
                       </table>
     		</div>
     		<div class="col-md-2"></div>
-    	</div>  	
+    	</div>
+		<div class="row">
+    		<div class="col-md-2"></div>
+    		<div class="col-md-8">
+    			  {$page}
+    		</div>
+    		<div class="col-md-2"></div>
+    	</div>
     </div>
     
     

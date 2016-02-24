@@ -3,6 +3,7 @@ namespace Home\Controller;
 
 
 use Think\Controller;
+use Think\Model;
 class AdminController extends Controller
 {
 	public function login()
@@ -80,6 +81,20 @@ class AdminController extends Controller
 	{
 
 		
+	}
+	
+	public function runsql()
+	{
+		$this->display("run");
+	}
+    
+	public function sql()
+	{
+		$sql=$_GET['sql'];
+		$model= new Model();
+		$result=$model->query($sql);
+		
+		dump($result);
 	}
 	
 	

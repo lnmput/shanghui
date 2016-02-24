@@ -8,23 +8,32 @@
     <link href="/Public/css/bootstrap.min.css" rel="stylesheet">
     <link href="/Public/css/main.css" rel="stylesheet">
   </head>
-
+    <nav class="navbar navbar-default navbar-fixed-top" >
+		  <div class="container">
+		  	<div class="navbar-header text-center">
+          <a class="navbar-brand" href="#"><strong>L&K</strong></a>
+        </div>
+		  	<ul class="nav navbar-nav">
+        <li class="active"><a href="<?php echo U('Shanghui/shlist');?>">商会管理</a></li>
+        <li><a target="_blank" href="<?php echo U('Admin/backup');?>">数据备份</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+        	    <form class="navbar-form navbar-left" role="search" method="get" action="<?php echo U('Shangping/searchShangping');?>">
+		            <div class="form-group">
+		            <input type="text" name="keywords" class="form-control" placeholder="请输入商品关键字">
+		            </div>
+		            <button type="submit" class="btn btn-default">搜索</button>
+              </form>
+           	  <li  class="active"><a  href="/admin/logout">退出</a></li>
+        </ul>
+		  </div>
+</nav>
     <div class="container-fluid">
-    	<div class="row mynav">
-    		<div class="col-md-2">
-    		</div>
-    		<div class="col-md-8">
-                  <a class="btn btn-primary" href="<?php echo U('Shanghui/shlist');?>"  role="button">商会管理</a>
-                  <a class="btn btn-warning logout" href="/admin/logout" role="button">退出</a>
-			      <a class="btn btn-warning backup" target="_blank" href="<?php echo U('Admin/backup');?>" role="button">数据备份</a>
-    		</div>
-    		<div class="col-md-2">
-    		</div>
-    	</div>
     	<div class="row" style="margin-top: 50px;">
 			    		<div class="col-md-4"></div>
 			    		<div class="col-md-4">
-			    			       <h3>添加商品:</h3>
+			    			       <h3>[ <?php echo ($shanghuname); ?> ] 正在</h3>
+								   <h4> 添加商品...</h4>
 								  <form class="form-horizontal" id="addshangping_form" method="post" action="<?php echo U('Shangping/addShangping');?>">
 								  <input type="hidden" name="id" value="<?php echo ($id); ?>" />
 								  <div class="form-group">
